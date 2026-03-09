@@ -72,16 +72,29 @@ session = Session()
 
 # Criar objetos de produtos
 
+# Create 
+
 produto1 = Produto("Notebook", 5500, 6, True)
 produto2 = Produto("Teclado", 500, 100, True)
+produto3 = Produto("Mouse", 150, 55, True)
 
 # Adicionar os produtos na sessão (carrinho)
 
 session.add(produto1)
 session.add(produto2)
+session.add(produto3)
 
 # Confirmar a inserção no db
 
 # Salvar no db
 
 session.commit()
+
+# Listar 
+
+# Buscar todos os Produtos do banco 
+
+produtos = session.query(Produto).all()
+
+for p in produtos:
+    print(f"Produto: {p.id}, Nome: {p.nome}, preco: {p.preco}, estoque: {p.estoque}, ativo: {p.ativo} ")
