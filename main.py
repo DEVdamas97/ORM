@@ -139,3 +139,16 @@ session.commit()
 
 for p in produtos:
     print(f"Produto: {p.id}, Nome: {p.nome}, preco: {p.preco}, estoque: {p.estoque}, ativo: {p.ativo}\n")
+
+
+# Remover o Produto
+
+produto_remover = session.query(Produto).filter_by(id=2).first()
+
+session.delete(produto_remover)
+
+# Confirmar remoção
+
+session.commit()
+
+print("Produto removido com sucesso!")
