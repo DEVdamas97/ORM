@@ -59,7 +59,7 @@ class Produto(Base):
 # Criar conexão com o sqlite
 
 # echo=True = log do sql
-engine = create_engine("sqlite:///estoque.db", echo=True)
+engine = create_engine("sqlite:///estoque.db", echo=False)
 
 # Criar Tabelas no Banco se ainda não existirem
 
@@ -80,15 +80,15 @@ produto3 = Produto("Mouse", 150, 55, True)
 
 # Adicionar os produtos na sessão (carrinho)
 
-session.add(produto1)
-session.add(produto2)
-session.add(produto3)
+# session.add(produto1)
+# session.add(produto2)
+# session.add(produto3)
 
 # Confirmar a inserção no db
 
 # Salvar no db
 
-session.commit()
+# session.commit()
 
 # Listar 
 
@@ -96,5 +96,46 @@ session.commit()
 
 produtos = session.query(Produto).all()
 
+# for p in produtos:
+#     print(f"Produto: {p.id}, Nome: {p.nome}, preco: {p.preco}, estoque: {p.estoque}, ativo: {p.ativo} ")
+
+# UPDATE (atualizar)
+
+# Buscar o produto com id = 1 
+
+# produto_id = session.query(Produto).filter(Produto.id == 1).first()
+
+# print(produto_id)
+
+# produto_estoque = session.query(Produto).filter(Produto.estoque  > 10).all()
+# for p in produto_estoque:
+#     print(produto_estoque[1].estoque)
+
+# produto_id_2 = session.query(Produto).filter_by(id = 1).first()
+
+# print(produto_id_2)
+
+# Podemos usar o ORDER BY no db
+
+# produtos_organizados = session.query(Produto).order_by(Produto.estoque).all()
+# produtos_organizados = session.query(Produto).desc(Produto.estoque).all()
+
+# Podemos listar limitando a quantidade de resultados
+
+# produtos_mais_caros = session.query(Produto).order_by(Produto.preco.desc()).limit(3).all()
+
+# for p in produtos_mais_caros:
+#     print(f"Nome: {p.nome}\nQuantidade: {p.preco}\n\n")
+
+# Update Atualizar
+
+notebook = session.query(Produto).filter_by(id=1).first()
+
+notebook.preco = 6000
+
+# Confirmar esssa alteração
+
+session.commit()
+
 for p in produtos:
-    print(f"Produto: {p.id}, Nome: {p.nome}, preco: {p.preco}, estoque: {p.estoque}, ativo: {p.ativo} ")
+    print(f"Produto: {p.id}, Nome: {p.nome}, preco: {p.preco}, estoque: {p.estoque}, ativo: {p.ativo}\n")
